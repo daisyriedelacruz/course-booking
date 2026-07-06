@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
 import AppNavbar from "./components/AppNavbar";
 import Footer from "./components/Footer";
@@ -18,9 +19,7 @@ import Register from "./pages/Register";
 import MyCourses from "./pages/MyCourses";
 
 function App() {
-  // State hook for the user state is defined here to allow it to have a global scope
-  // This can be achieved using prop drilling or via react context
-  // This will be used to store the user information and will be used for validating if a user is logged in on the app or not
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState({
     id: null,
     isAdmin: null,
@@ -32,15 +31,37 @@ function App() {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      unsetUser();
+      setIsLoading(false);
+      return;
+    }
+
     fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          unsetUser();
+
+          setUser({
+            id: null,
+            firstName: "",
+            lastName: "",
+            isAdmin: null,
+          });
+
+          return null;
+        }
+        return res.json();
+      })
       .then((data) => {
         // Set the user states values with the user details upon successful login.
-        if (typeof data !== "undefined") {
+        if (data !== "undefined") {
           setUser({
             id: data._id,
             isAdmin: data.isAdmin,
@@ -52,21 +73,23 @@ function App() {
         } else {
           setUser({
             id: null,
+            firstName: "",
+            lastName: "",
             isAdmin: null,
           });
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  // Used to check if the user information is properly stored upon login and the localStorage information is cleared upon logout
-  useEffect(() => {
-    console.log(user);
-    console.log(localStorage);
-  }, [user]);
-
+  if (isLoading) {
+    return <div className="text-center mt-5">Loading...</div>;
+  }
   return (
     <>
-      <UserProvider value={{ user, setUser, unsetUser }}>
+      <UserProvider value={{ user, setUser, unsetUser, isLoading }}>
         <Router>
           <AppNavbar />
           <Container>

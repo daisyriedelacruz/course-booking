@@ -50,26 +50,23 @@ export default function About() {
               table at your favorite café.
             </p>
 
-            <p className="about-body-text mb-5">
-              Why Bookish?
-              <ul>
-                <li>
-                  <strong>Curated for You:</strong> Every course on our platform
-                  is hand-picked to ensure engaging content and practical
-                  skills.
-                </li>
-                <li>
-                  <strong>Zero Friction Booking:</strong> No complicated
-                  application processes. Find a course, tap a button, and secure
-                  your seat instantly.
-                </li>
-                <li>
-                  <strong>Expertly Taught:</strong> Learn directly from
-                  passionate local instructors, industry professionals, and
-                  creative experts who love what they do.
-                </li>
-              </ul>
-            </p>
+            <p className="about-body-text mb-5">Why Bookish?</p>
+            <ul>
+              <li>
+                <strong>Curated for You:</strong> Every course on our platform
+                is hand-picked to ensure engaging content and practical skills.
+              </li>
+              <li>
+                <strong>Zero Friction Booking:</strong> No complicated
+                application processes. Find a course, tap a button, and secure
+                your seat instantly.
+              </li>
+              <li>
+                <strong>Expertly Taught:</strong> Learn directly from passionate
+                local instructors, industry professionals, and creative experts
+                who love what they do.
+              </li>
+            </ul>
           </Col>
 
           <Col md={5} className="d-none d-md-flex about-banner-panel">
