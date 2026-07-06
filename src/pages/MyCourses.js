@@ -71,10 +71,10 @@ export default function MyCourses() {
                             },
                           )
                         : "N/A"}
-                      <p className="text-muted mb-0">
-                        {formatTime12Hour(course.schedule?.startTime)} -{" "}
-                        {formatTime12Hour(course.schedule?.endTime)}
-                      </p>
+                    </p>
+                    <p className="text-muted mb-0">
+                      {formatTime12Hour(course.schedule?.startTime)} -{" "}
+                      {formatTime12Hour(course.schedule?.endTime)}
                     </p>
                   </div>
                   <Button

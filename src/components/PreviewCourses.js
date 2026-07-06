@@ -9,7 +9,7 @@ export default function PreviewCourses(props) {
   const { _id, name, description } = data;
 
   return (
-    <Col xs={12} md={breakPoint} className="my-5">
+    <Col xs={12} md={10} lg={breakPoint} className="my-5">
       {/*Adding the class cardHighlight for min-height*/}
       {/*Adding spacing for x-axis*/}
       <Card className="cardHighlight mx-2">
