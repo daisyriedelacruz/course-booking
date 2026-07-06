@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
 import AppNavbar from "./components/AppNavbar";
 import Footer from "./components/Footer";
